@@ -1,0 +1,26 @@
+div {
+    width: 400px;
+    padding-left: 550px;
+    padding-right: 500px;
+}
+
+img {
+    width: 400px;
+    height: auto;
+}
+
+.underlined {
+    text-decoration: underline;
+
+}
+
+.highlighted {
+background-color: orange;
+
+}
+
+.red_font {
+    color: red;
+    font-weight: bold;
+
+}

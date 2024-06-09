@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction</title>
+    <!--Styling for tag specific areas-->
+    <style>
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <!--Introduction Division with link to other page-->
+    <div>
+        <h2>Introduction</h2>
+        <a href="index.html">Main Page</a>
+    </div>
+    <!--Both tables with experience seperate from skills-->
+    <div class="table">
+        <table style="border-style: solid; border-collapse: collapse;">
+            <tr>
+                <th>Technical Skills</th>
+                <th>Soft Skills</th>
+            </tr>
+            <tr>
+                <td>
+                    Java<br>
+                    Python<br>
+                    C++<br>
+                    JavaScript<br>
+                    SQL<br>
+                    ARM Assembly<br>
+                    VHDL<br>
+                    HTML<br>
+                    CSS<br>
+                    Electrical & Digital Circuit Design & Analysis<br>
+                    Version Control
+                </td>
+                <td>
+                    Leadership<br>
+                    Project Management<br>
+                    Adaptability<br>
+                    Team-Oriented<br>
+                    Time Management<br>
+                    Critical Thinking<br>
+                    Active Listening<br>
+                    Ethical Judgment<br>
+                    Creativity<br>
+                    Resilience
+                </td>
+            </tr>
+        </table>
+    
+        <h2>Experience</h2>
+        <table class="table" style="border-style: solid; border-collapse: collapse;">
+            <tr>
+                <th>Position</th>
+                <th>Company</th>
+                <th>Duration</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>IT Applications Intern</td>
+                <td>Public Works Commission of Fayetteville</td>
+                <td>Summer 2023</td>
+                <td>Assisted vendors with implementing cloud based software into core infrastructure. </td>
+            </tr>
+            <tr>
+                <td>IT Infrastructure Intern</td>
+                <td>Public Works Commission of Fayetteville</td>
+                <td>Summer 2022</td>
+                <td>Assisted support staff with dealing with everyday technical issues and setting up new hardware/software. </td>
+            </tr>
+            
+        </table>
+    </div>
+    <!--Recent project photos to demonstrate the skills and knowledge in action-->
+    <h2>Recent Projects</h2>
+    <div class="nightlight">
+        <h3>Automatic Nightlight Design</h3>
+        <img src="img/IMG_1518.PNG" alt="Nightlight Design" style="height: auto; width:450px">
+        <p class="description1">This nightlight is designed with only analog hardware to shut off the Transistor if light is coming through. However, <br>if there is no light, then the nightlight should turn on. We utilized a photoresistor in parallel with the transistor where the base is connected. <br>That means with no light, there is a lot of resistance, meaning current will turn on the transistor, however, with light there is <br> no resistance in the transistor. Which means current will flow freely through it and never touch the transistor. <br></p>
+    </div>
+    <div class="bluetooth">
+        <h3>Bluetooth Connection with Microcontroller</h3>
+        <img src="img/IMG_1578.jpg" alt="Bluetooth connection with Microcontroller" style="height: auto; width:450px">
+        <p class="description2">This image, shows an HC-05 module connected to a microcontroller called the MSP430FR2355. This bluetooth connection <br>allows for serial communcation to other devices including the core computer. For example, it can transmit if one of the buttons on the device is being pressed. </p>
+    </div>
+</body>
+</html>
