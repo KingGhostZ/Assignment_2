@@ -1,86 +1,88 @@
-// Array to store results
-let resultsArray = [];
 
-// Handling OK button
-function okButton() {
-    var xinput = document.getElementById('xinput').value;
-    var opinput = document.getElementById('opinput').value;
-    var yinput = document.getElementById('yinput').value;
 
-    let x = parseInt(xinput);
-    let y = parseInt(yinput);
-    let result;
+// Let the html content load before javascript executes.
+document.addEventListener("DOMContentLoaded", function() {
+    let results = [];
 
-    if (isNaN(x) || isNaN(y)) { // Check if numbers are valid integers
-        result = "Wrong Input Number";
-    } else {
-        switch (opinput) {
-            case "+":
-                result = x + y;
-                resultsArray.push(result); // Store result if valid calculation
-                break;
-            case "-":
-                result = x - y;
-                resultsArray.push(result); // Store result if valid calculation
-                break;
-            case "*":
-                result = x * y;
-                resultsArray.push(result); // Store result if valid calculation
-                break;
-            case "/":
-                result = x / y;
-                resultsArray.push(result); // Store result if valid calculation
-                break;
-            case "%":
-                result = x % y;
-                resultsArray.push(result); // Store result if valid calculation
-                break;
-            default:
-                result = "Invalid Operand";
-                break;  
+    while (true) {
+        let x = prompt("Give a X value.", "23");
+        if (x === null) break; // If client presses cancel
+        if (isNaN(x)) {
+            x = "Invalid";
+        } else {
+            x = parseInt(x);
+        }
+
+        let op = prompt("Give an operator like '*', '/', '+', '-', '%'", "+");
+        if (op === null) break; // If client presses cancel
+
+        let y = prompt("Give a Y value.", "78");
+        if (y === null) break; // If client presses cancel
+        if (isNaN(y)) {
+            y = "Invalid";
+        } else {
+            y = parseInt(y);
+        }
+
+        let result;
+        if (x === "Invalid" || y === "Invalid") {
+            result = "Invalid Input";
+        } else {
+            result = calculate(x, op, y);
+            if (result === null) result = "Invalid Operator";
+        }
+
+        updateTable(x, op, y, result);
+        if (typeof result === "number") {
+            results.push(result);
         }
     }
 
-    // Display result in the table regardless
-    let basicInfoBody = document.getElementById('basicInfo');
-    let newRow = basicInfoBody.insertRow();
-    let cell1 = newRow.insertCell(0);
-    let cell2 = newRow.insertCell(1);
-    let cell3 = newRow.insertCell(2);
-    let cell4 = newRow.insertCell(3);
-
-    cell1.textContent = xinput;
-    cell2.textContent = opinput;
-    cell3.textContent = yinput;
-    cell4.textContent = result;
-
-    // Update statistics only if the result is a valid integer
-    if (!isNaN(result) && Number.isInteger(result)) {
-        updateStatistics();
+    if (results.length > 0) {
+        let min = Math.min(...results);
+        let max = Math.max(...results);
+        let sum = results.reduce((a, b) => a + b, 0);
+        let avg = sum / results.length;
+        updateSummaryTable(min, max, avg, sum);
     }
 
-    // Clear the input fields for new input
-    document.getElementById('xinput').value = '';
-    document.getElementById('opinput').value = '';
-    document.getElementById('yinput').value = '';
-}
+    function calculate(x, op, y) {
+        switch (op) {
+            case "+":
+                return x + y;
+            case "-":
+                return x - y;
+            case "*":
+                return x * y;
+            case "/":
+                return x / y;
+            case "%":
+                return x % y;
+            default:
+                return null;
+        }
+    }
 
-function updateStatistics() {
-    let min = Math.min(...resultsArray);
-    let max = Math.max(...resultsArray);
-    let sum = resultsArray.reduce((acc, curr) => acc + curr, 0);
-    let avg = sum / resultsArray.length;
+    function updateTable(x, op, y, result) {
+        const table = document.getElementById("resultsTable").getElementsByTagName("tbody")[0];
+        const newRow = table.insertRow();
 
-    // Display min, max, avg, and total at the bottom of the table
-    document.getElementById('minout').textContent = parseInt(min).toString(); 
-    document.getElementById('maxout').textContent = parseInt(max).toString(); 
-    document.getElementById('avgout').textContent = avg.toFixed(2);
-    document.getElementById('totout').textContent = parseInt(sum).toString(); 
-}
+        const cell1 = newRow.insertCell(0);
+        const cell2 = newRow.insertCell(1);
+        const cell3 = newRow.insertCell(2);
+        const cell4 = newRow.insertCell(3);
 
+        cell1.textContent = x;
+        cell3.textContent = y;
+        cell2.textContent = op;
+        cell4.textContent = result;
+    }
 
-function Cancel() {
-    // Hide the Input area when finished by pressing Cancel
-    document.querySelector('.inputArea').style.display = 'none';
-}
-
+    function updateSummaryTable(min, max, avg, total) {
+        const summaryDiv = document.getElementById("summary");
+        let summaryHTML = "<h2>Summary</h2>";
+        summaryHTML += "<table border='1'><tr><th>Minimum</th><th>Maximum</th><th>Average</th><th>Total</th></tr>";
+        summaryHTML += "<tr><td>" + min + "</td><td>" + max + "</td><td>" + avg + "</td><td>" + total + "</td></tr></table>";
+        summaryDiv.innerHTML = summaryHTML;
+    }
+});
